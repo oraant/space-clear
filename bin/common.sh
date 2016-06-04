@@ -43,7 +43,7 @@ function configure_global()
 
 function check_user()
 {
-    if (( ${#user[@]} == 0 )) && configure_global
+    (( ${#user[@]} == 0 )) && configure_global
     if (( ${#user[@]} == 0 ))
     then
         echo 'ERROR:'
@@ -54,7 +54,7 @@ function check_user()
     fi
 
     oper=$(whoami)
-    if [[ " $user " =~ " $oper " ]]
+    if [[ " ${user[@]} " =~ " $oper " ]]
     then
         return 0
     else
