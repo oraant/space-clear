@@ -16,10 +16,10 @@ function verify_config()
 {
     for config_file in $global_cfg $delete_cfg $black_cfg $disk_cfg
     do
-        if ! [ -r $config_file ]
+        if ! [ -f $config_file ]
         then
             echo 'ERROR:'
-            echo '  Configure file does not not exist or can not be read.'
+            echo '  Configure file does not not exist.'
             echo '  Please check the file:' $config_file
             echo ''
             exit 1
