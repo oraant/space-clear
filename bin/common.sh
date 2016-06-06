@@ -65,3 +65,33 @@ function check_user()
         exit 3
     fi
 }
+
+### lib for logs start ###
+
+function debug()
+{
+    echo $(date +%Y-%m-%d' '%H:%M:%S)' DEBUG: '$*
+}
+
+function log()
+{
+    echo $(date +%Y-%m-%d' '%H:%M:%S)'   LOG: '$*
+}
+
+function alert()
+{
+    echo $(date +%Y-%m-%d' '%H:%M:%S)' ALERT: '$*
+}
+
+function warn()
+{
+    echo $(date +%Y-%m-%d' '%H:%M:%S)'  WARN: '$*
+}
+
+function error()
+{
+    echo $(date +%Y-%m-%d' '%H:%M:%S)' ERROR: '$*
+}
+
+
+### lib for logs end ###
