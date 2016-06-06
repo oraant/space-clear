@@ -2,7 +2,7 @@
 
 # author: oraant
 # create: 2016-06-04
-# update: 2016-06-04
+# update: 2016-06-06
 
 # load common shell
 source $(dirname $0)/common.sh
