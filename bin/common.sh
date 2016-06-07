@@ -5,7 +5,7 @@
 # update: 2016-06-04
 
 # get config files
-SC_HOME=$(cd $(dirname $0)/..;pwd)
+SC_HOME=$(cd $(dirname $0)/..;/bin/pwd)
 global_cfg=$SC_HOME/conf/global.conf
 delete_cfg=$SC_HOME/conf/delete.conf
 black_cfg=$SC_HOME/conf/black.conf
