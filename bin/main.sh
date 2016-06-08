@@ -17,4 +17,6 @@ check_user
 # nothing to do.
 
 # init environment
-export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
+if disk;then
+    delete
+fi
