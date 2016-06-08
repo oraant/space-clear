@@ -71,28 +71,32 @@ function check_user()
 
 function debug()
 {
-    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' DEBUG: '$*
+    [[ $loglevel -ge 5 ]] || return
+    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' DEBUG: '$* >> $logfile
 }
 
 function log()
 {
-    echo -e $(date +%Y-%m-%d' '%H:%M:%S)'   LOG: '$*
+    [[ $loglevel -ge 4 ]] || return
+    echo -e $(date +%Y-%m-%d' '%H:%M:%S)'   LOG: '$* >> $logfile
 }
 
 function alert()
 {
-    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' ALERT: '$*
+    [[ $loglevel -ge 3 ]] || return
+    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' ALERT: '$* >> $logfile
 }
 
 function warn()
 {
-    echo -e $(date +%Y-%m-%d' '%H:%M:%S)'  WARN: '$*
+    [[ $loglevel -ge 2 ]] || return
+    echo -e $(date +%Y-%m-%d' '%H:%M:%S)'  WARN: '$* >> $logfile
 }
 
 function error()
 {
-    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' ERROR: '$*
+    [[ $loglevel -ge 1 ]] || return
+    echo -e $(date +%Y-%m-%d' '%H:%M:%S)' ERROR: '$* >> $logfile
 }
-
 
 ### lib for logs end ###
