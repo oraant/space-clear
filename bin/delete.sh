@@ -94,7 +94,7 @@ function filter_configure_file()
     dirs=($(cat $black_cfg |egrep -v '^$|^#'))
     while read time act files
     do
-        for file in $files #in case of `ll dir*/file*.sh`
+        for file in $files
         do
             total_files=$(( total_files+1 ))
             file_gap=$(file_mtime_gap $file)
@@ -126,6 +126,8 @@ function filter_configure_file()
 
 function delete_files()
 {
+    #todo: 如果遇到没有权限、文件不存在之类的问题怎么办?
+
     if [ -f $tmp_remove_cfg ];then
         tmp_path_r=($(cat $tmp_remove_cfg))
         echo "rm ${tmp_path_r[@]}"
