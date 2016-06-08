@@ -26,10 +26,8 @@ function verify_disk_config()
 {
     cat $disk_cfg |egrep -v '^$|^#' |while read part avail util
     do
-        if [[ $avail =~ ^[0-9]+[G|M|K]$ ]] && [[ $util =~ ^[0-9]+%$ ]]
+        if [[ ! $avail =~ ^[0-9]+[G|M|K]$ ]] || [[ ! $util =~ ^[0-9]+%$ ]]
         then
-            echo -n
-        else
             error "Disk Configure file can not parse."
             error "Please check the ${part} partition in the configure file: \$SC_HOME/conf/disk.cfg"
             exit 5
