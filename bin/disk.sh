@@ -32,7 +32,7 @@ function verify_disk_config()
             echo -n
         else
             error "Disk Configure file can not parse."
-            error "Please check the ${part} partition in the configure file: ${disk_cfg}"
+            error "Please check the ${part} partition in the configure file: \$SC_HOME/conf/disk.cfg"
             exit 5
         fi
     done
