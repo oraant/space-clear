@@ -18,16 +18,15 @@ check_user
 
 # init environment
 #export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
-#  tmp_disk_stat=$SC_HOME/tmp/disk.tmp
-#  tmp_calc_conf=$SC_HOME/tmp/disk.cfg
-#  tmp_lock_file=$SC_HOME/tmp/disk.lck
+tmp_remove_conf=$SC_HOME/tmp/delete.cfg
+tmp_clear_conf=$SC_HOME/tmp/clear.cfg
 
 # verify black.cfg
 function verify_black_config()
 {
     cat $black_cfg |egrep -v '^$|^#' |while read directory
     do
-        if [ ! -d $directory ] && [ ! -f $directory ]
+        if [ ! -d $directory ]
         then
             error "${directory} in Black Configure file can not parse."
             error "Please check the ${directory} in the configure file: ${black_cfg}"
@@ -48,7 +47,7 @@ function verify_delete_config()
             exit 5
         fi
 
-        if [[ $act != 'delete' ]] && [[ $act != 'clear' ]]
+        if [[ $act != 'remove' ]] && [[ $act != 'clear' ]]
         then
             error "${act} in Delete Configure file can not parse."
             error "Please check the action of ${files} in the configure file: ${delete_cfg}"
@@ -66,14 +65,38 @@ function verify_delete_config()
 }
 
 # filter files and delete it.
-function filter_and_delete()
+function filter_configure_file()
 {
     cat $delete_cfg |egrep -v '^$|^#' |while read time act files
     do
-        /bin/pwd
+        cat $black_cfg |egrep -v '^$|^#' |while read directory
+        do
+            for file in $files #in case of `ll dir*/file*.sh`
+            do
+                filepath=$(dirname $(readlink -f $file))
+                echo $filepath $directory
+                if [[ $filepath == $directory ]];then
+                    echo 'match'
+                    debug "$file has filtered by $directory in the configure file: $black_cfg."
+                elif [[ $act == 'delete' ]];then
+                    echo "$time $file">>$tmp_remove_conf
+                    debug "$file will be removed"
+                elif [[ $act == 'clear' ]];then
+                    echo "$time $file">>$tmp_clear_conf
+                    debug "$file will be cleared"
+                fi
+            done
+        done
     done
+}
+
+function clear_tmp_file()
+{
+    [ -f $tmp_remove_conf ] && rm $tmp_remove_conf
+    [ -f $tmp_clear_conf ] && rm $tmp_clear_conf
 }
 
 verify_black_config
 verify_delete_config
-filter_and_delete
+filter_configure_file
+#clear_tmp_file
