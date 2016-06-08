@@ -17,7 +17,6 @@ check_user
 # nothing to do.
 
 # init environment
-#export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
 tmp_remove_cfg=$SC_HOME/tmp/delete.cfg
 tmp_clear_cfg=$SC_HOME/tmp/clear.cfg
 

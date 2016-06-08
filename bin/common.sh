@@ -5,6 +5,7 @@
 # update: 2016-06-04
 
 # get config files
+export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
 SC_HOME=$(cd $(dirname $0)/..;/bin/pwd)
 global_cfg=$SC_HOME/conf/global.cfg
 delete_cfg=$SC_HOME/conf/delete.cfg

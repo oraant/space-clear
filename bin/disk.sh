@@ -17,7 +17,6 @@ check_user
 # nothing to do.
 
 # init environment
-#export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
 tmp_disk_stat=$SC_HOME/tmp/disk.tmp
 tmp_calc_cfg=$SC_HOME/tmp/disk.cfg
 tmp_lock_file=$SC_HOME/tmp/disk.lck
