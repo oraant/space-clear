@@ -19,7 +19,7 @@ check_user
 # init environment
 #export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
 tmp_disk_stat=$SC_HOME/tmp/disk.tmp
-tmp_calc_conf=$SC_HOME/tmp/disk.cfg
+tmp_calc_cfg=$SC_HOME/tmp/disk.cfg
 tmp_lock_file=$SC_HOME/tmp/disk.lck
 
 # get disk configurations
@@ -52,10 +52,10 @@ function create_calc_file()
             'K')new_avail=${value};;
         esac
 
-        echo $part $new_avail $new_util >> $tmp_calc_conf
+        echo $part $new_avail $new_util >> $tmp_calc_cfg
     done
 
-    if ! [ -f $tmp_calc_conf ]
+    if ! [ -f $tmp_calc_cfg ]
     then
         error 'Temp file create failed when transform unit.'
         error 'Please check the file and directory permission.'
@@ -80,7 +80,7 @@ function create_status_file()
 # judge if disk need warn according to configurations.
 function disk_need_warn()
 {
-    cat $tmp_calc_conf |while read part avail util
+    cat $tmp_calc_cfg |while read part avail util
     do
         read now_part now_avail now_util < <(cat $tmp_disk_stat |awk -v p="$part" '{if($1==p){print}}')
 
@@ -107,7 +107,7 @@ function disk_need_warn()
 
 function clear_disk_tmp()
 {
-    [ -f $tmp_calc_conf ] && rm $tmp_calc_conf
+    [ -f $tmp_calc_cfg ] && rm $tmp_calc_cfg
     [ -f $tmp_disk_stat ] && rm $tmp_disk_stat
     [ -f $tmp_lock_file ] && rm $tmp_lock_file
 }

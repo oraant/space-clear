@@ -18,8 +18,8 @@ check_user
 
 # init environment
 #export PATH=$PATH:/usr/bin:/usr/sbin:/sbin:/bin:.
-tmp_remove_conf=$SC_HOME/tmp/delete.cfg
-tmp_clear_conf=$SC_HOME/tmp/clear.cfg
+tmp_remove_cfg=$SC_HOME/tmp/delete.cfg
+tmp_clear_cfg=$SC_HOME/tmp/clear.cfg
 
 # verify black.cfg
 function verify_black_config()
@@ -79,10 +79,10 @@ function filter_configure_file()
                     echo 'match'
                     debug "$file has filtered by $directory in the configure file: $black_cfg."
                 elif [[ $act == 'delete' ]];then
-                    echo "$time $file">>$tmp_remove_conf
+                    echo "$time $file">>$tmp_remove_cfg
                     debug "$file will be removed"
                 elif [[ $act == 'clear' ]];then
-                    echo "$time $file">>$tmp_clear_conf
+                    echo "$time $file">>$tmp_clear_cfg
                     debug "$file will be cleared"
                 fi
             done
@@ -92,8 +92,8 @@ function filter_configure_file()
 
 function clear_tmp_file()
 {
-    [ -f $tmp_remove_conf ] && rm $tmp_remove_conf
-    [ -f $tmp_clear_conf ] && rm $tmp_clear_conf
+    [ -f $tmp_remove_cfg ] && rm $tmp_remove_cfg
+    [ -f $tmp_clear_cfg ] && rm $tmp_clear_cfg
 }
 
 verify_black_config

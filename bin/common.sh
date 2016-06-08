@@ -6,10 +6,10 @@
 
 # get config files
 SC_HOME=$(cd $(dirname $0)/..;/bin/pwd)
-global_cfg=$SC_HOME/conf/global.conf
-delete_cfg=$SC_HOME/conf/delete.conf
-black_cfg=$SC_HOME/conf/black.conf
-disk_cfg=$SC_HOME/conf/disk.conf
+global_cfg=$SC_HOME/conf/global.cfg
+delete_cfg=$SC_HOME/conf/delete.cfg
+black_cfg=$SC_HOME/conf/black.cfg
+disk_cfg=$SC_HOME/conf/disk.cfg
 
 # make sure the config files are exists and read permission is granted
 function verify_config()
